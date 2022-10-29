@@ -1,26 +1,43 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import path from "./path";
+import Main from "@/views/MainView.vue";
+import Home from "@/views/HomeView.vue";
+
+const defaultPath = path.main.path;
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    name: "home",
-    component: HomeView,
+    path: path.root.path,
+    name: path.root.name,
+    redirect: defaultPath,
+    meta: {},
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: path.main.path,
+    name: path.main.name,
+    component: Main,
+    meta: {},
+  },
+  {
+    path: path.home.path,
+    name: path.home.name,
+    component: Home,
+    meta: {},
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to: any, from, next) => {
+  // 정의되지 않은 경로
+  if (!routes.map((el) => el.name).includes(to.name)) {
+    next({ name: path.main.name });
+  }
+
+  next();
 });
 
 export default router;
