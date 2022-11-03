@@ -9,6 +9,9 @@
       <div class="note">
         <span>노트 첫 페이지</span>
       </div>
+      <div class="note-spine">
+        <div />
+      </div>
     </section>
   </div>
 </template>
@@ -31,7 +34,9 @@ export default defineComponent({
       if (coverElement) {
         coverElement.className = coverElement.className + " note-cover-scale";
       }
-      // this.$router.push(path.home.path);
+      setTimeout(() => {
+        // this.$router.push(path.home.path);
+      }, 1000);
     },
   },
 });
@@ -52,7 +57,8 @@ section {
   align-items: center;
   justify-content: center;
   display: flex;
-  perspective: 2000px;
+  perspective: 2200px;
+  // transform: rotateX(30deg);
 }
 .note-scale {
   transform: scale(1.5);
@@ -64,15 +70,15 @@ section {
   border: 1px solid rgb(190, 184, 184);
   height: 600px;
   width: 470px;
-  box-shadow: 5px 5px 15px #333;
   transition: 2s;
   position: absolute;
 }
 .note {
-  background-color: rgb(239, 222, 172);
+  background-color: $note;
+  // box-shadow: 0px 8px 10px #333;
 }
 .note-cover {
-  background-color: rgb(252, 248, 229);
+  background-color: $note-cover;
   z-index: 10;
   transform-origin: left center;
   transition-duration: 1.5s;
@@ -80,9 +86,12 @@ section {
 }
 .note-cover-scale {
   transform: rotateY(-180deg);
-  background-color: rgb(239, 222, 172);
+  background-color: $note;
   .cover-content {
     //
   }
+}
+
+.note-book {
 }
 </style>

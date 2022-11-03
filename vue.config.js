@@ -5,4 +5,13 @@ module.exports = defineConfig({
     port: 12340,
     https: false,
   },
+  css: {
+    loaderOptions: {
+      scss: {
+        additionalData: `
+          @import "@/assets/scss/global.scss";
+        `,
+      },
+    },
+  },
 });
